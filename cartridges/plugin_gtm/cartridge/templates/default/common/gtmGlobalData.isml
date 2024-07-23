@@ -1,0 +1,4 @@
+<script id="gtm-global-data" type="application/json">
+    <isprint value="${JSON.stringify(pdict.gtmGlobalData)}" encoding="off" />
+</script>
+<isinclude url="${URLUtils.url('GTM-CustomerData')}" />
