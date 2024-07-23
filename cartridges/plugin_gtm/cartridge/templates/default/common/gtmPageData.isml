@@ -1,0 +1,3 @@
+<script id="gtm-page-data" type="application/json">
+    <isprint value="${JSON.stringify(pdict.gtmPageData)}" encoding="off" />
+</script>

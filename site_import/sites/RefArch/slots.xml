@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slot-configurations xmlns="http://www.demandware.com/xml/impex/slot/2008-09-08">
+    <slot-configuration slot-id="home-product-set-m" context="global" configuration-id="home-product-set" default="true" assigned-to-site="true">
+        <description>homepage product set(Spring Has Sprung) slot</description>
+        <template>slots/content/contentAssetBodyPromo.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <content-assets>
+                <content-asset content-id="home-product-set-content"/>
+            </content-assets>
+        </content>
+    </slot-configuration>
+</slot-configurations>

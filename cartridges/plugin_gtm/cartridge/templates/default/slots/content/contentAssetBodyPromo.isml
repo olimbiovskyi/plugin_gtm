@@ -1,0 +1,13 @@
+<isif condition="${slotcontent != null}">
+    <isset name="gtmHelpers" value="${require('*/cartridge/scripts/helpers/gtmHelpers')}" scope="page" />
+    <isset name="gtmPromotionData" value="${gtmHelpers.getPromotionData(slotcontent)}" scope="page" />
+
+    <div
+        class="js-gtm-promotion"
+        data-gtm-promotion-data="${JSON.stringify(gtmPromotionData)}"
+    >
+        <isloop items="${slotcontent.content}" var="contentAsset">
+            <isprint value="${contentAsset.custom.body}" encoding="off" />
+        </isloop>
+    </div>
+</isif>

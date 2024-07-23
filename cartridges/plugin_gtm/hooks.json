@@ -1,0 +1,16 @@
+{
+    "hooks": [
+        {
+            "name": "app.server.registerRoute",
+            "script": "./cartridge/scripts/hooks/gtm.js"
+        },
+        {
+            "name": "app.template.htmlHead",
+            "script": "./cartridge/scripts/hooks/gtm.js"
+        },
+        {
+            "name": "app.template.afterFooter",
+            "script": "./cartridge/scripts/hooks/gtm.js"
+        }
+    ]
+}
