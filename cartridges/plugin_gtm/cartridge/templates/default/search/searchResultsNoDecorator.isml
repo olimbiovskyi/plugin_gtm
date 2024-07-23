@@ -75,18 +75,19 @@
                         </div>
 
                         <div class="col-sm-12 col-md-9">
-                             <!--- Selected filters bar --->
-                             <div class="row filter-bar d-md-none">
-                                 <isinclude template="search/filterBar" />
-                             </div>
+                            <!--- Selected filters bar --->
+                            <div class="row filter-bar d-md-none">
+                                <isinclude template="search/filterBar" />
+                            </div>
 
-                             <!--- Product Grid --->
-                             <div class="row product-grid testello"
+                            <!--- Product Grid --->
+                            <div class="row product-grid"
                                 itemtype="http://schema.org/SomeProducts"
                                 itemid="#product"
-                                data-gtm-list="${Resource.msg('gtm.search.results.list', 'gtm', '')}">
-                                 <isinclude template="search/productGrid" />
-                             </div>
+                                data-gtm-list="${Resource.msg('gtm.search.results.list', 'gtm', '')}"
+                            >
+                                <isinclude template="search/productGrid" />
+                            </div>
                         </div>
                     </div>
                 </isif>
