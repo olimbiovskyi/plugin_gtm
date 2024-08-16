@@ -1,9 +1,0 @@
-{
-    "global": ["viewGlobal", "viewPromotion"],
-    "pdp": ["viewItem"],
-    "plp": ["viewItemList"],
-    "search": ["viewItemList"],
-    "cart": ["viewCart"],
-    "checkout": ["beginCheckout"],
-    "orderconfirmation": ["purchase"]
-}

@@ -1,10 +1,9 @@
 'use strict';
 
 const utils = require('./util');
-const dynamicEvents = require('./dynamicEvents');
-const pageLoadEvents = require('./pageLoadEvents');
-const dynamicEventsConfig = require('./dynamicEventsConfig.json');
-const pageLoadEventsConfig = require('./pageLoadEventsConfig.json');
+const eventsConfig = require('./eventsConfig');
+const pageViewHandlers = require('./pageViewHandlers');
+const interactionHandlers = require('./interactionHandlers');
 
 /**
  * https://developers.google.com/analytics/devguides/collection/ga4/ecommerce
@@ -31,15 +30,20 @@ module.exports = {
             customerData: utils.getData('customer')
         };
 
-        const dynamicEventsToInit = [...(dynamicEventsConfig.global || []), ...(dynamicEventsConfig[pageType] || [])];
+        // Retrieve global events
+        const globalPageViewEvents = eventsConfig.global?.events?.pageViewEvents || [];
+        const globalInteractionEvents = eventsConfig.global?.events?.interactionEvents || [];
 
-        utils.executeFunctions(dynamicEventsToInit, dynamicEvents, [gtmData]);
+        // Retrieve page-specific events
+        const pageSpecificPageViewEvents = eventsConfig.pages?.[pageType]?.pageViewEvents || [];
+        const pageSpecificInteractionEvents = eventsConfig.pages?.[pageType]?.interactionEvents || [];
 
-        const pageLoadEventsToInit = [
-            ...(pageLoadEventsConfig.global || []),
-            ...(pageLoadEventsConfig[pageType] || [])
-        ];
+        // Combine global and page-specific events
+        const pageViewEventsToInit = [...globalPageViewEvents, ...pageSpecificPageViewEvents];
+        const interactionEventsToInit = [...globalInteractionEvents, ...pageSpecificInteractionEvents];
 
-        utils.executeFunctions(pageLoadEventsToInit, pageLoadEvents, [gtmData]);
+        // Execute the events
+        utils.executeFunctions(pageViewEventsToInit, pageViewHandlers, [gtmData]);
+        utils.executeFunctions(interactionEventsToInit, interactionHandlers, [gtmData]);
     }
 };

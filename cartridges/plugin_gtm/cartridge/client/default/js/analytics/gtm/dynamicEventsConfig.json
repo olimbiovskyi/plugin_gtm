@@ -1,4 +1,0 @@
-{
-    "global": ["selectItem", "selectPromotion", "addToCart", "removeFromCart"],
-    "checkout": ["addShippingInfo", "addPaymentInfo"]
-}
