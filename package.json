@@ -1,6 +1,6 @@
 {
     "name": "plugin_gtm",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "GTM plugin for SFRA",
     "private": "true",
     "scripts": {
