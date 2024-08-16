@@ -1,9 +1,5 @@
 'use strict';
 
-/**
- * Module for handling various Google Tag Manager (GTM) events.
- * @module GTMEvents
- */
 module.exports = {
     /**
      * Pushes global view data to the data layer.
