@@ -1,5 +1,7 @@
 'use strict';
 
+var ProductLineItemData = require('*/cartridge/models/gtm/productLineItemData');
+
 /**
  * Constructs a ProductData instance with attributes from the given API product and options.
  * @constructor
@@ -7,6 +9,8 @@
  * @param {Object} [options] - Optional parameters to initialize the ProductData instance.
  */
 function ProductData(apiProduct, options) {
+    ProductLineItemData.apply(this, arguments);
+
     var params = options || {};
 
     this.item_name = apiProduct.name;
@@ -19,7 +23,6 @@ function ProductData(apiProduct, options) {
 
     this.assignVariant(apiProduct);
     this.assignCategories(apiProduct);
-    this.assignProductLineItemAttributes(params.lineItem);
 }
 
 /**
@@ -101,42 +104,6 @@ ProductData.prototype.assignCategories = function (apiProduct) {
         var index = i + 1;
         this['item_category' + (index > 1 ? index : '')] = category.displayName;
     }, this);
-};
-
-/**
- * Assigns attributes from a line item to the ProductData instance.
- * @param {dw.order.LineItem} lineItem - The line item object containing product attributes.
- */
-ProductData.prototype.assignProductLineItemAttributes = function (lineItem) {
-    if (!lineItem) {
-        return;
-    }
-
-    this.quantity = lineItem.quantityValue;
-    this.price = lineItem.adjustedPrice.divide(lineItem.quantityValue || 1).value;
-
-    if (lineItem.priceAdjustments.length > 0) {
-        var collections = require('*/cartridge/scripts/util/collections');
-
-        var couponCodes = collections.reduce(
-            lineItem.priceAdjustments,
-            function (codes, priceAdjustment) {
-                if (
-                    priceAdjustment.promotion &&
-                    priceAdjustment.couponLineItem &&
-                    priceAdjustment.couponLineItem.couponCode
-                ) {
-                    codes.push(priceAdjustment.couponLineItem.couponCode);
-                }
-                return codes;
-            },
-            []
-        );
-
-        if (couponCodes.length) {
-            this.coupon = couponCodes.join(';');
-        }
-    }
 };
 
 module.exports = ProductData;
